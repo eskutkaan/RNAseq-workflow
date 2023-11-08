@@ -1,0 +1,10 @@
+name: rna-seq-workflow
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - hisat2
+  - samtools
+  - stringtie
+  - snakemake
+
