@@ -32,7 +32,7 @@ rule sambam:
         bam = "alignments/{sample}.bam"
     shell:
         """
-    samtools sort -@ 128 {input.sam} -o {output.bam}
+    samtools sort -@ 2 {input.sam} -o {output.bam}
     """
 
 # Define the rule to assemble transcripts and generate gene count tables using StringTie
