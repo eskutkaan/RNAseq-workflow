@@ -19,13 +19,21 @@ rule hisat2:
         r1 = "data/{sample}_R1.fq.gz",
         r2 = "data/{sample}_R2.fq.gz"
     output:
-        bam = "alignments/{sample}.bam",
         sam = "alignments/{sample}.sam"
     shell:
         """
 	hisat2 -x reference/[index_name] -1 {input.r1} -2 {input.r2} -p 128 --dta -S {output.sam} 
-	samtools sort -@ 128 {output.sam} -o {output.bam}
 	"""
+
+rule sambam:
+    input:
+        sam = "alignments/{sample}.sam"
+    output:
+        bam = "alignments/{sample}.bam"
+    shell:
+        """
+    samtools sort -@ 128 {input.sam} -o {output.bam}
+    """
 
 # Define the rule to assemble transcripts and generate gene count tables using StringTie
 rule stringtie_count:
